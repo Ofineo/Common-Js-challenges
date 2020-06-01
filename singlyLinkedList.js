@@ -69,6 +69,14 @@ class SinglyLinkedList {
     }
     return currentNode;
   }
+  set(index, value) {
+    let node = this.get(index);
+    if (node) {
+      node.val = value;
+      return true;
+    }
+    return false;
+  }
 }
 
 //SinglyLinkedList testing
