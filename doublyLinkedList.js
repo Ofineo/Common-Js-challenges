@@ -87,4 +87,13 @@ class DoublyLinkedList {
     }
     return currentNode;
   }
+  set(index, val) {
+    let node = get(index);
+    if (node != null) {
+      node.val = val;
+      return true;
+    }
+    return false;
+  }
+  
 }
