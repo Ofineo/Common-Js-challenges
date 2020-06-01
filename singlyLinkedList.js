@@ -8,8 +8,8 @@ class Node {
 class SinglyLinkedList {
   constructor() {
     this.length = 0;
-    this.tail = 0;
-    this.head = 0;
+    this.tail = null;
+    this.head = null;
   }
   push(val) {
     let newNode = new Node(val);
