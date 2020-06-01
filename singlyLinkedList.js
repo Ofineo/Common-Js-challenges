@@ -90,6 +90,16 @@ class SinglyLinkedList {
     this.length++;
     return true;
   }
+  remove(index){
+    if (index < 0 || index >= this.length) return null;
+    if (index === 0) return !!this.shift();
+    if (index == this.length-1) return !!this.pop();
+    let prevNode = get(index-1);
+    let removedNode = prevNode.next;
+    prevNode.next = removedNode.next;
+    this.length--;
+    return removedNode;
+  }
 }
 
 //SinglyLinkedList testing
