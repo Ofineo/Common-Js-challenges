@@ -57,8 +57,17 @@ class SinglyLinkedList {
       this.head = newNode;
       this.length++;
     }
-    
+
     return this;
+  }
+  get(index) {
+    if (index < 0 || index >= this.length) return null;
+
+    let currentNode = this.head;
+    for (let i = 0; i < index; i++) {
+      currentNode = currentNode.next;
+    }
+    return currentNode;
   }
 }
 
@@ -84,3 +93,6 @@ console.assert(a.length == 1);
 console.log(a);
 console.assert(a.head.val == 23);
 console.assert(a.tail.val == 23);
+
+a.push(2);
+a.get(1);
