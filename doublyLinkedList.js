@@ -102,11 +102,28 @@ class DoublyLinkedList {
 
     let newNode = new Node(val);
     let prevNode = this.get(index - 1);
+
     newNode.next = prevNode.next;
     prevNode.next = newNode;
     newNode.prev = prevNode;
     newNode.next.prev = newNode;
     this.length++;
+    return true;
+  }
+  remove(index) {
+    if (index < 0 || index > this.length) return null;
+    if (index === 0) return !!this.shift();
+    if (index == this.length - 1) return !!this.pop();
+
+    let removedNode = this.get(index);
+    let prevNode = removedNode.prev;
+    let nextNode = removedNode.next;
+
+    nextNode.prev = prevNode;
+    prevNode.next = nextNode;
+    removedNode.next = null;
+    removedNode.prev = null;
+    this.length--;
     return true;
   }
 }
