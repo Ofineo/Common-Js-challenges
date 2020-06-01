@@ -90,15 +90,30 @@ class SinglyLinkedList {
     this.length++;
     return true;
   }
-  remove(index){
+  remove(index) {
     if (index < 0 || index >= this.length) return null;
     if (index === 0) return !!this.shift();
-    if (index == this.length-1) return !!this.pop();
-    let prevNode = get(index-1);
+    if (index == this.length - 1) return !!this.pop();
+    let prevNode = get(index - 1);
     let removedNode = prevNode.next;
     prevNode.next = removedNode.next;
     this.length--;
     return removedNode;
+  }
+  reverse() {
+    node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+    let prevNode = null;
+    let nextNode;
+
+    for (let i = 0; i < this.length; i++) {
+      next = node.next;
+      node.next = prevNode;
+      prev = node;
+      node = nextNode;
+    }
+    return this;
   }
 }
 
