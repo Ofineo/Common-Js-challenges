@@ -36,7 +36,38 @@ class BinarySearchTree {
       }
     }
   }
+  find(val) {
+    if (!this.root) return null;
+    let currentNode = this.root;
 
+    while (currentNode) {
+      if (val === currentNode.val) return currentNode;
+
+      if (val < currentNode.val) {
+        if (!currentNode.left) return null;
+        currentNode = currentNode.left;
+      }
+      if (val > currentNode.val) {
+        if (!currentNode.right) return null;
+        currentNode = currentNode.right;
+      }
+    }
+  }
+  breadSearchFirst() {
+    let queue = [];
+    let values = [];
+    let node = this.root;
+
+    queue.push(node);
+
+    while (queue.length > 0) {
+      node = queue.shift();
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+      values.push(node.val);
+    }
+    return values;
+  }
 }
 
 let a = new BinarySearchTree();
