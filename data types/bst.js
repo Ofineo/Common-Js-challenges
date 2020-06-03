@@ -53,6 +53,7 @@ class BinarySearchTree {
       }
     }
   }
+
   breadSearchFirst() {
     let queue = [];
     let values = [];
@@ -68,10 +69,55 @@ class BinarySearchTree {
     }
     return values;
   }
+  depthFirstSearchPreOrder() {
+    let values = [];
+    let node = this.root;
+    function traverse(node) {
+      values.push(node.val);
+      if (node.left) traverse(node.left);
+      if (node.right) traverse(node.right);
+    }
+    traverse(node);
+    return values;
+  }
+  depthFirstSearchPostOrder() {
+    let values = [];
+    let node = this.root;
+    function traverse(node) {
+      if (node.left) traverse(node.left);
+      if (node.right) traverse(node.right);
+      values.push(node.val);
+    }
+    traverse(node);
+    return values;
+  }
+  depthFirstSearchInOrder() {
+    let values = [];
+    let node = this.root;
+    function traverse(node) {
+      if (node.left) traverse(node.left);
+      values.push(node.val);
+      if (node.right) traverse(node.right);
+    }
+    traverse(node);
+    return values;
+  }
+
 }
+
+//    10
+//  9    11
+//5         65
+//  8     22  73
 
 let a = new BinarySearchTree();
 a.insert(10);
 a.insert(11);
 a.insert(9);
+a.insert(5);
+a.insert(65);
+a.insert(22);
+a.insert(8);
+a.insert(73);
 a.find(9);
+a.depthFirstSearchInOrder();
