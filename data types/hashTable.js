@@ -21,3 +21,23 @@ class HashTable {
     }
     return this;
   }
+  get(key) {
+    let index = this._hash(key);
+    if (this.keyMap[index].length > 1) {
+      for (let val of this.keyMap[index]) {
+          if (val.hasOwnProperty(key)) return val[key];
+          continue;
+      }
+    } else {
+      return this.keyMap[index][0].hasOwnProperty(key)
+        ? this.keyMap[index][0][key]
+        : undefined;
+    }
+  }
+}
+let a =new HashTable(10);
+a.set('jordi',41);
+a.set('Yidah',40);
+a.set('pollo',67);
+a.set('marcos',43);
+a.get('marcos');
