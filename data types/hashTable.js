@@ -25,8 +25,8 @@ class HashTable {
     let index = this._hash(key);
     if (this.keyMap[index].length > 1) {
       for (let val of this.keyMap[index]) {
-          if (val.hasOwnProperty(key)) return val[key];
-          continue;
+        if (val.hasOwnProperty(key)) return val[key];
+        continue;
       }
     } else {
       return this.keyMap[index][0].hasOwnProperty(key)
@@ -34,10 +34,42 @@ class HashTable {
         : undefined;
     }
   }
+  keys() {
+    let keysArr = [];
+    for (let i = 0; i < this.keyMap.length; i++) {
+      if (this.keyMap[i]) {
+        if (this.keyMap[i].length > 1) {
+          for (let k = 0; k < this.keyMap[i].length; k++) {
+            keysArr.push(Object.keys(this.keyMap[i][k]));
+          }
+        } else {
+          keysArr.push(Object.keys(this.keyMap[i][0]));
+        }
+      }
+    }
+    return keysArr;
+  }
+  values() {
+    let valuesArr = [];
+    for (let i = 0; i < this.keyMap.length; i++) {
+      if (this.keyMap[i]) {
+        if (this.keyMap[i].length > 1) {
+          for (let k = 0; k < this.keyMap[i].length; k++) {
+            valuesArr.push(this.keyMap[i][k][Object.keys(this.keyMap[i][k])]);
+          }
+        } else {
+          valuesArr.push(this.keyMap[i][0][Object.keys(this.keyMap[i][0])]);
+        }
+      }
+    }
+    let uniqueVal = new Set(valuesArr);
+    return uniqueVal;
+  }
 }
-let a =new HashTable(10);
-a.set('jordi',41);
-a.set('Yidah',40);
-a.set('pollo',67);
-a.set('marcos',43);
-a.get('marcos');
+let a = new HashTable(10);
+a.set("jordi", 41);
+a.set("Yidah", 40);
+a.set("pollo", 67);
+a.set("marcos", 43);
+a.get("marcos");
+a.keys();
