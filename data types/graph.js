@@ -79,6 +79,25 @@ class Graph {
 
     return results;
   }
+  dfsIterative(vertex) {
+    //make a stack; for simplicity I will use an array;
+    let stack = [];
+    stack.push(vertex);
+    let results = [];
+    let visited = {};
+
+    while (stack.length) {
+      let vrtx = stack.pop();
+      if (!visited.hasOwnProperty(vrtx)) {
+        visited[vrtx] = true;
+        results.push(vrtx);
+        this.adjacencyList[vrtx].forEach((neighbour) => {
+          stack.push(neighbour);
+        });
+      }
+    }
+    return results;
+  }
 }
 let a = new Graph();
 // a.addVertex("London");
@@ -108,3 +127,4 @@ a.addEdge("D", "E");
 a.addEdge("D", "F");
 a.addEdge("E", "F");
 a.dfsRecursive("A");
+a.dfsIterative("A");
