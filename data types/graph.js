@@ -85,9 +85,10 @@ class Graph {
     stack.push(vertex);
     let results = [];
     let visited = {};
+    let vrtx;
 
     while (stack.length) {
-      let vrtx = stack.pop();
+      vrtx = stack.pop();
       if (!visited.hasOwnProperty(vrtx)) {
         visited[vrtx] = true;
         results.push(vrtx);
@@ -98,24 +99,25 @@ class Graph {
     }
     return results;
   }
-  bfs(vertex){
-        //make a queue; for simplicity I will use an array with push and shift;
-        let queue = [];
-        queue.push(vertex);
-        let results = [];
-        let visited = {};
-    
-        while (queue.length) {
-          let vrtx = queue.shift();
-          if (!visited.hasOwnProperty(vrtx)) {
-            visited[vrtx] = true;
-            results.push(vrtx);
-            this.adjacencyList[vrtx].forEach((neighbour) => {
-              queue.push(neighbour);
-            });
-          }
-        }
-        return results;
+  bfs(vertex) {
+    //make a queue; for simplicity I will use an array with push and shift;
+    let queue = [];
+    queue.push(vertex);
+    let results = [];
+    let visited = {};
+    let vrtx;
+
+    while (queue.length) {
+      vrtx = queue.shift();
+      if (!visited.hasOwnProperty(vrtx)) {
+        visited[vrtx] = true;
+        results.push(vrtx);
+        this.adjacencyList[vrtx].forEach((neighbour) => {
+          queue.push(neighbour);
+        });
+      }
+    }
+    return results;
   }
 }
 let a = new Graph();
@@ -128,13 +130,13 @@ let a = new Graph();
 // a.addEdge("Madrid", "Barcelona");
 // a.removeEdge("Mexico", "Barcelona");
 // a.removeVertex("London");
-  //     A
-  //   /   \
-  //  B    C 
-  //  |    |
-  //  D----E
-  //   \  /
-  //     F
+//     A
+//   /   \
+//  B    C
+//  |    |
+//  D----E
+//   \  /
+//     F
 //test recursive DFS
 
 a.addVertex("A");
@@ -153,4 +155,4 @@ a.addEdge("D", "F");
 a.addEdge("E", "F");
 a.dfsRecursive("A");
 a.dfsIterative("A");
-a.bfs('A');
+a.bfs("A");
