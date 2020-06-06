@@ -58,13 +58,53 @@ class Graph {
     delete this.adjacencyList[vertex];
     return true;
   }
+  dfsRecursive(vertex) {
+    console.assert(
+      this.adjacencyList.hasOwnProperty(vertex),
+      "Vertex doesn't exists"
+    );
+    let results = [];
+    let visited = {};
+    let adjacencyList = this.adjacencyList;
+
+    function dfs(vertex) {
+      if (!vertex) return;
+      results.push(vertex);
+      visited[vertex] = true;
+      adjacencyList[vertex].forEach((neighbour) => {
+        if (!visited.hasOwnProperty(neighbour)) dfs(neighbour);
+      });
+    }
+    dfs(vertex);
+
+    return results;
+  }
 }
 let a = new Graph();
-a.addVertex("London");
-a.addVertex("Mexico");
-a.addVertex("Barcelona");
-a.addEdge("London", "Barcelona");
-a.addEdge("London", "Mexico");
-a.addEdge("Barcelona", "Mexico");
-a.addEdge("Madrid", "Barcelona");
-a.removeEdge("Mexico", "Barcelona");
+// a.addVertex("London");
+// a.addVertex("Mexico");
+// a.addVertex("Barcelona");
+// a.addEdge("London", "Barcelona");
+// a.addEdge("London", "Mexico");
+// a.addEdge("Barcelona", "Mexico");
+// a.addEdge("Madrid", "Barcelona");
+// a.removeEdge("Mexico", "Barcelona");
+// a.removeVertex("London");
+
+//test recursive DFS
+
+a.addVertex("A");
+a.addVertex("B");
+a.addVertex("C");
+a.addVertex("D");
+a.addVertex("E");
+a.addVertex("F");
+
+a.addEdge("A", "B");
+a.addEdge("A", "C");
+a.addEdge("B", "D");
+a.addEdge("C", "E");
+a.addEdge("D", "E");
+a.addEdge("D", "F");
+a.addEdge("E", "F");
+a.dfsRecursive("A");
