@@ -80,7 +80,7 @@ class Graph {
     return results;
   }
   dfsIterative(vertex) {
-    //make a stack; for simplicity I will use an array;
+    //make a stack; for simplicity I will use an array with push and pop;
     let stack = [];
     stack.push(vertex);
     let results = [];
@@ -98,6 +98,25 @@ class Graph {
     }
     return results;
   }
+  bfs(vertex){
+        //make a queue; for simplicity I will use an array with push and shift;
+        let queue = [];
+        queue.push(vertex);
+        let results = [];
+        let visited = {};
+    
+        while (queue.length) {
+          let vrtx = queue.shift();
+          if (!visited.hasOwnProperty(vrtx)) {
+            visited[vrtx] = true;
+            results.push(vrtx);
+            this.adjacencyList[vrtx].forEach((neighbour) => {
+              queue.push(neighbour);
+            });
+          }
+        }
+        return results;
+  }
 }
 let a = new Graph();
 // a.addVertex("London");
@@ -109,7 +128,13 @@ let a = new Graph();
 // a.addEdge("Madrid", "Barcelona");
 // a.removeEdge("Mexico", "Barcelona");
 // a.removeVertex("London");
-
+  //     A
+  //   /   \
+  //  B    C 
+  //  |    |
+  //  D----E
+  //   \  /
+  //     F
 //test recursive DFS
 
 a.addVertex("A");
@@ -128,3 +153,4 @@ a.addEdge("D", "F");
 a.addEdge("E", "F");
 a.dfsRecursive("A");
 a.dfsIterative("A");
+a.bfs('A');
